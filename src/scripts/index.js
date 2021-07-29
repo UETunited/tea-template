@@ -1,9 +1,11 @@
 import AlpineI18n from 'alpinejs-i18n';
+import persist from '@alpinejs/persist'
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
 
 Alpine.plugin(AlpineI18n);
+Alpine.plugin(persist);
 
 // create alpine store
 Alpine.store('app', {
@@ -15,6 +17,9 @@ Alpine.store('app', {
   isSettingsPanelOpen: false,
   isSearchBoxOpen: false,
 });
+
+import {authComponent} from './auth';
+Alpine.data('auth', authComponent);
 
 // create locale
 let locale = 'en';
