@@ -1,0 +1,91 @@
+{
+  "name": "tea-template",
+  "description": "TEA stack template, greatly inspired by https://github.com/mattwaler/tea-stack",
+  "version": "1.0.0",
+  "engines": {
+    "node": "14.x.x",
+    "npm": "7.x.x"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:UETunited/tea-template.git"
+  },
+  "keywords": [
+    "alpinejs",
+    "eleventy",
+    "netlify",
+    "snowpack",
+    "tailwindcss"
+  ],
+  "author": {
+    "name": "dungvv",
+    "email": "dungvv@uetunited.com"
+  },
+  "license": "MIT",
+  "browserslist": [
+    "defaults",
+    "maintained node versions",
+    "> 5%"
+  ],
+  "lint-staged": {
+    "*.{css,js,html}": "stylelint --fix",
+    "*.{js,html}": "eslint --fix"
+  },
+  "scripts": {
+    "clean": "rimraf src/_site",
+    "serve": "serve --no-clipboard --listen 8080 dist",
+    "dev": "env-cmd run-s clean dev:*",
+    "dev:eleventy": "npx @11ty/eleventy",
+    "dev:snowpack": "snowpack dev",
+    "build": "env-cmd -f .env.production run-s clean build:*",
+    "build:eleventy": "npx @11ty/eleventy",
+    "build:snowpack": "snowpack build",
+    "build:sw": "workbox generateSW",
+    "lint": "run-s lint:*",
+    "lint:eslint": "eslint --ext .js,.html src/",
+    "lint:stylelint": "stylelint src/**/*.js src/**/*.html src/**/*.css",
+    "format": "run-s format:*",
+    "format:eslint": "eslint --ext .js,.html src/ --fix",
+    "format:stylelint": "stylelint src/**/*.js src/**/*.html src/**/*.css --fix",
+    "validate": "run-s build lint",
+    "setup": "npm install && npm run validate"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "@jadex/snowpack-plugin-tailwindcss-jit": "^0.3.0",
+    "@snowpack/plugin-postcss": "^1.3.0",
+    "@snowpack/plugin-run-script": "^2.3.0",
+    "@tailwindcss/jit": "^0.1.18",
+    "@tailwindcss/typography": "^0.4.0",
+    "autoprefixer": "^10.2.4",
+    "babel-eslint": "^10.1.0",
+    "browserslist": "^4.16.6",
+    "env-cmd": "^10.1.0",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-prettier": "^3.4.0",
+    "lint-staged": "^11.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.2.14",
+    "postcss-cli": "^8.3.1",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "serve": "^12.0.0",
+    "snowpack": "^3.5.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
+    "tailwindcss": "^2.1.2",
+    "workbox-cli": "^6.1.5"
+  },
+  "dependencies": {
+    "alpinejs": "^3.0.1",
+    "alpinejs-i18n": "^2.0.0"
+  }
+}
