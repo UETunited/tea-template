@@ -9,11 +9,20 @@ export function makeJsonRequest(method, path, data) {
     method,
     body: JSON.stringify(data),
     headers: {
-      'x-authorization': getToken(),
+      'Authorization': getToken(),
     },
   };
-  return fetch(`${baseApiUrl}/${apiVersion}/${path}`, requestOptions)
-    .then((response) => {console.log(response.status); return response.json()})
+  return fetch(`${baseApiUrl}${path}`, requestOptions)
+    .then((response) => {
+      if (response.status === 401) {
+        localStorage.clear();
+        window.location.href = '/auth/login/'
+      }
+      if (response.status === 400) // show error 
+      if (response.status === 404) // show not found error
+      if (response.status > 400) // general error, show toast
+      return response.json();
+    })
     .catch((err) => {
       console.log(err);
     });
