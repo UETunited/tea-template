@@ -22,7 +22,7 @@
       Chốt<span :class="{'lg:hidden': !$store.app.isSidebarOpen}">
         liền</span>
     </span>
-    <button @click="$store.app.toggleSidbarMenu()" class="p-2 rounded-md lg:hidden">
+    <button @click="$store.app.toggleSidebarMenu()" class="p-2 rounded-md lg:hidden">
       <svg
         class="w-6 h-6 text-gray-600"
         xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@
     <ul class="p-2 overflow-hidden">
       <li>
         <a
-          href="#"
+          href="/dashboard/"
           class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
           :class="{'justify-center': !$store.app.isSidebarOpen}">
           <span>

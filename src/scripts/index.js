@@ -7,15 +7,34 @@ window.Alpine = Alpine;
 Alpine.plugin(AlpineI18n);
 Alpine.plugin(persist);
 
+import { getToken } from './common';
+
 // create alpine store
 Alpine.store('app', {
   loading: true,
   isSidebarOpen: false,
-  toggleSidbarMenu() {
+  toggleSidebarMenu() {
     this.isSidebarOpen = !this.isSidebarOpen;
   },
   isSettingsPanelOpen: false,
   isSearchBoxOpen: false,
+  handleError(error) {
+    switch(error) {
+      case 'UNAUTHORIZED':
+        localStorage.clear();
+        window.location.href = '/auth/401/';
+        break;
+      case 'NOT_FOUND':
+        break;
+      case 'INTERNAL_ERROR':
+        console.log('handle 500')
+        break;
+      case 'FORBIDDEN':
+        break;
+      default:
+        break;
+    }
+  }
 });
 
 import { authComponent } from './auth';

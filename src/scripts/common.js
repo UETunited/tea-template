@@ -2,6 +2,12 @@ export function getToken() {
   return localStorage.getItem('token');
 }
 
+export class BadRequestError {
+  constructor(content) {
+    this.content = content;
+  }
+}
+
 const baseApiUrl = document.querySelector('body').dataset.baseapiurl;
 const apiVersion = document.querySelector('body').dataset.apiversion;
 export function makeJsonRequest(method, path, data) {
@@ -9,21 +15,21 @@ export function makeJsonRequest(method, path, data) {
     method,
     body: JSON.stringify(data),
     headers: {
-      'Authorization': getToken(),
+      'Content-type': 'application/json',
+      Authorization: getToken(),
     },
   };
-  return fetch(`${baseApiUrl}${path}`, requestOptions)
-    .then((response) => {
-      if (response.status === 401) {
-        localStorage.clear();
-        window.location.href = '/auth/login/'
-      }
-      if (response.status === 400) // show error 
-      if (response.status === 404) // show not found error
-      if (response.status > 400) // general error, show toast
-      return response.json();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  return fetch(`${baseApiUrl}${path}`, requestOptions).then((response) => {
+    if (response.status === 401) throw 'UNAUTHORIZED';
+    else if (response.status === 400 || response.status === 422)
+      throw new BadRequestError(response.json());
+    else if (response.status === 404) throw 'NOT_FOUND';
+    else if (response.status === 403) throw 'FORBIDDEN';
+    else if (response.status > 400) {
+      console.log(response);
+      throw 'INTERNAL_ERROR';
+    } // general internal error
+
+    return response.json();
+  });
 }
