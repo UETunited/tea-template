@@ -2,18 +2,19 @@
 {% extends "layouts/no_auth_layout.html" %}
 {% block main %}
   <a href="/" class=" inline-block mb-6 text-3xl font-bold tracking-wider uppercase text-primary-dark dark:text-light ">
-    TEA stack
+    Chốt liền
   </a>
   <main>
-    <div class=" w-full max-w-sm px-4 py-6 space-y-6 bg-white rounded-md dark:bg-darker ">
+    <div x-data="register" class=" w-full max-w-sm px-4 py-6 space-y-6 bg-white rounded-md dark:bg-darker ">
       <h1 class="text-xl font-semibold text-center">Register</h1>
-      <form action="#" class="space-y-6">
+      <form @submit.prevent="register()" class="space-y-6">
         <input
           class=" w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring
             focus:ring-primary-100 dark:focus:ring-primary-darker "
           type="text"
-          name="username"
-          placeholder="Username"
+          name="name"
+          placeholder="Name"
+          x-model="name"
           required/>
         <input
           class=" w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring
@@ -21,6 +22,7 @@
           type="email"
           name="email"
           placeholder="Email address"
+          x-model="email"
           required/>
         <input
           class=" w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring
@@ -28,6 +30,7 @@
           type="password"
           name="password"
           placeholder="Password"
+          x-model="password"
           required/>
         <input
           class=" w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring
@@ -35,6 +38,7 @@
           type="password"
           name="password_confirmation"
           placeholder="Confirm Password"
+          x-model="confirmPassword"
           required/>
         <div
           class="flex items-center justify-between">

@@ -7,8 +7,6 @@ window.Alpine = Alpine;
 Alpine.plugin(AlpineI18n);
 Alpine.plugin(persist);
 
-import { getToken } from './common';
-
 // create alpine store
 Alpine.store('app', {
   loading: true,
@@ -18,27 +16,54 @@ Alpine.store('app', {
   },
   isSettingsPanelOpen: false,
   isSearchBoxOpen: false,
+  centerToast: {
+    error: false,
+    info: false,
+    success: false,
+    successText = 'Success'
+  },
   handleError(error) {
-    switch(error) {
+    switch (error) {
       case 'UNAUTHORIZED':
         localStorage.clear();
-        window.location.href = '/auth/401/';
+        window.history.pushState(window.location.href, document.title);
+        window.location.href = '/401/';
         break;
       case 'NOT_FOUND':
+        window.history.pushState(window.location.href, document.title);
+        window.location.href = '/404/';
         break;
       case 'INTERNAL_ERROR':
-        console.log('handle 500')
+        this.centerToast.error = true;
+        setTimeout(() => {
+          this.centerToast.error = false;
+        }, 3000);
         break;
       case 'FORBIDDEN':
+        window.history.pushState(window.location.href, document.title);
+        window.location.href = '/403/';
         break;
       default:
+        this.centerToast.error = true;
+        setTimeout(() => {
+          this.centerToast.error = false;
+        }, 3000);
         break;
     }
-  }
+  },
+  handleSuccess(redirect, successText) {
+    this.centerToast.success = true;
+    this.centerToast.successText = successText;
+    setTimeout(() => {
+      this.centerToast.success = false;
+      window.location.href = redirect;
+    }, 1500);
+  },
 });
 
-import { authComponent } from './auth';
-Alpine.data('auth', authComponent);
+import { loginComponent, registerComponent } from './auth';
+Alpine.data('login', loginComponent);
+Alpine.data('register', registerComponent);
 import { productComponent } from './product';
 Alpine.data('product', productComponent);
 
