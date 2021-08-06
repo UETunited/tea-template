@@ -33,6 +33,12 @@ Alpine.store('app', {
         window.history.pushState(window.location.href, document.title);
         window.location.href = '/404/';
         break;
+      case 'BAD_REQUEST':
+        this.centerToast.error = true;
+        setTimeout(() => {
+          this.centerToast.error = false;
+        }, 3000);
+        break;
       case 'INTERNAL_ERROR':
         this.centerToast.error = true;
         setTimeout(() => {
@@ -78,8 +84,6 @@ window.AlpineI18n.create(locale, messages);
 Alpine.start();
 
 const env = document.querySelector('body').dataset.env;
-
-console.log(env);
 
 // Check that service workers are supported
 if ('serviceWorker' in navigator && env === 'production') {

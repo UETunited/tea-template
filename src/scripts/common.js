@@ -22,7 +22,8 @@ export function makeJsonRequest(method, path, data) {
   return fetch(`${baseApiUrl}${path}`, requestOptions).then((response) => {
     if (response.status === 401) throw 'UNAUTHORIZED';
     else if (response.status === 400 || response.status === 422)
-      throw new BadRequestError(response.json());
+      // throw new BadRequestError(response.json());
+      throw 'BAD_REQUEST';
     else if (response.status === 404) throw 'NOT_FOUND';
     else if (response.status === 403) throw 'FORBIDDEN';
     else if (response.status > 400) {
@@ -35,7 +36,6 @@ export function makeJsonRequest(method, path, data) {
 }
 
 export function validate(element, config, value) {
-  console.log(element.dataset, element.value, value)
   const rules = JSON.parse(element.dataset.rules);
   if (!Iodine.isValid(element.value, rules)) {
     config.error = true;
