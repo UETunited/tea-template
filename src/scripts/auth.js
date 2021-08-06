@@ -1,4 +1,9 @@
 import { BadRequestError, makeJsonRequest, validate } from './common';
+import jwt_decode from "jwt-decode";
+
+export function getToken() {
+  return localStorage.getItem('token');
+}
 
 export function loginComponent() {
   return {
@@ -9,7 +14,7 @@ export function loginComponent() {
       email: {
         error: false,
         message: 'Can not be blank and must be a valid email address',
-      }
+      },
     },
     init() {
       this.$watch('email', (value) => {
@@ -22,7 +27,11 @@ export function loginComponent() {
         password: this.password,
       })
         .then((data) => {
-          this.token = data.accessToken;
+          localStorage.setItem('token', data.accessToken);
+          const userInfo = jwt_decode(data.accessToken);
+          // console.log(userInfo)
+          localStorage.setItem('user', JSON.stringify(userInfo));
+          window.location.href = '/dashboard/'
         })
         .catch((error) => {
           if (error instanceof BadRequestError) {

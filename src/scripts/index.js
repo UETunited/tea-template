@@ -20,14 +20,16 @@ Alpine.store('app', {
     error: false,
     info: false,
     success: false,
-    successText: 'Success'
+    successText: 'Success',
   },
   handleError(error) {
     switch (error) {
       case 'UNAUTHORIZED':
         localStorage.clear();
-        window.history.pushState(window.location.href, document.title);
-        window.location.href = '/401/';
+        if (!window.location.href.includes('/auth/login')) {
+          window.history.pushState(window.location.href, document.title);
+          window.location.href = '/401/';
+        }
         break;
       case 'NOT_FOUND':
         window.history.pushState(window.location.href, document.title);
@@ -67,6 +69,23 @@ Alpine.store('app', {
   },
 });
 
+Alpine.data('root', () => ({
+  init() {
+    this.$refs.loading.classList.add('hidden');
+    const exp = JSON.parse(localStorage.getItem('user')).exp;
+    if (exp * 1000 <= new Date().getTime()) {
+      localStorage.clear();
+      window.location.href = '/401/';
+    }
+  },
+}));
+function userInfoComponent() {
+  return {
+    user: this.$persist({}).as('user'),
+    isOpen: false,
+  }
+}
+Alpine.data('userInfo', userInfoComponent);
 import { loginComponent, registerComponent } from './auth';
 Alpine.data('login', loginComponent);
 Alpine.data('register', registerComponent);

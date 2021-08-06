@@ -14,7 +14,7 @@
     class="antialiased text-gray-900 bg-white" data-env="{{ env.env }}" data-baseapiurl="{{ env.baseApiUrl }}" data-apiversion="{{ env.apiVersion }}">
     <!-- root component -->
     <div
-      class="flex h-screen overflow-y-hidden bg-white" x-data x-init="$refs.loading.classList.add('hidden')">
+      class="flex h-screen overflow-y-hidden bg-white" x-data="root">
       <!-- loading screen -->
       <div
         x-ref="loading"

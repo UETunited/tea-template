@@ -79,6 +79,7 @@
   "dependencies": {
     "@alpinejs/persist": "^3.2.2",
     "alpinejs": "^3.0.1",
-    "alpinejs-i18n": "^2.0.0"
+    "alpinejs-i18n": "^2.0.0",
+    "jwt-decode": "^3.1.2"
   }
 }
