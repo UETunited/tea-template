@@ -20,7 +20,7 @@ Alpine.store('app', {
     error: false,
     info: false,
     success: false,
-    successText = 'Success'
+    successText: 'Success'
   },
   handleError(error) {
     switch (error) {

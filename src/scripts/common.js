@@ -33,3 +33,13 @@ export function makeJsonRequest(method, path, data) {
     return response.json();
   });
 }
+
+export function validate(element, config, value) {
+  console.log(element.dataset, element.value, value)
+  const rules = JSON.parse(element.dataset.rules);
+  if (!Iodine.isValid(element.value, rules)) {
+    config.error = true;
+  } else {
+    config.error = false;
+  }
+}
