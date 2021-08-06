@@ -72,10 +72,10 @@ Alpine.store('app', {
 Alpine.data('root', () => ({
   init() {
     this.$refs.loading.classList.add('hidden');
-    const exp = JSON.parse(localStorage.getItem('user')).exp;
-    if (exp * 1000 <= new Date().getTime()) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || !user.exp || user.exp * 1000 <= new Date().getTime()) {
       localStorage.clear();
-      window.location.href = '/401/';
+      window.location.href = '/';
     }
   },
 }));
