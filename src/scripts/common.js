@@ -16,7 +16,7 @@ export function makeJsonRequest(method, path, data) {
     body: JSON.stringify(data),
     headers: {
       'Content-type': 'application/json',
-      Authorization: getToken(),
+      Authorization: 'Bearer ' + getToken(),
     },
   };
   return fetch(`${baseApiUrl}${path}`, requestOptions).then((response) => {
