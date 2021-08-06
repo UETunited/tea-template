@@ -128,14 +128,10 @@
             </div>
             <ul class="flex flex-col p-2 my-2 space-y-1">
               <li>
-                <a
-                  href="#"
-                  class=" block px-2 py-1 transition rounded-md hover:bg-gray-100 ">Link</a>
+                <a href="#" class=" block px-2 py-1 transition rounded-md hover:bg-gray-100 ">Link</a>
               </li>
               <li>
-                <a
-                  href="#"
-                  class=" block px-2 py-1 transition rounded-md hover:bg-gray-100 ">Another Link</a>
+                <a href="#" class=" block px-2 py-1 transition rounded-md hover:bg-gray-100 ">Another Link</a>
               </li>
             </ul>
             <div class=" flex items-center justify-center p-4 text-blue-700 underline border-t ">
@@ -174,9 +170,7 @@
             </div>
             <ul class="flex flex-col p-2 my-3 space-y-3">
               <li>
-                <a
-                  href="#"
-                  class=" flex items-start px-2 py-1 space-x-2 rounded-md hover:bg-gray-100 ">
+                <a href="#" class=" flex items-start px-2 py-1 space-x-2 rounded-md hover:bg-gray-100 ">
                   <span class="block mt-1">
                     <svg
                       class="w-6 h-6 text-gray-500"
@@ -204,9 +198,7 @@
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
-                  class=" flex items-start px-2 py-1 space-x-2 rounded-md hover:bg-gray-100 ">
+                <a href="#" class=" flex items-start px-2 py-1 space-x-2 rounded-md hover:bg-gray-100 ">
                   <span class="block mt-1">
                     <svg
                       class="w-6 h-6 text-gray-500"
@@ -239,19 +231,21 @@
         <button @click="isOpen = !isOpen" class="p-1 bg-gray-200 rounded-full focus:outline-none focus:ring">
           <img
             class="object-cover w-8 h-8 rounded-full"
-            :src="user.profilePicture ? user.profilePicture : 'https://avatars0.githubusercontent.com/u/57622665?s=460&u=8f581f4c4acd4c18c33a87b3e6476112325e8b38&v=4'"
+            :src="user.profilePicture ? user.profilePicture :
+              'https://avatars0.githubusercontent.com/u/57622665?s=460&u=8f581f4c4acd4c18c33a87b3e6476112325e8b38&v=4'"
             :alt="user.username"/>
         </button>
         <!-- green dot -->
         {# <div class=" absolute right-0 p-1 bg-green-400 rounded-full bottom-3 animate-ping "></div> #}
         {# <div class=" absolute right-0 p-1 bg-green-400 border border-white rounded-full bottom-3 "></div> #}
         <!-- Dropdown card -->
-        <div
+          <div
           @click.away="isOpen = false"
           x-show.transition.opacity="isOpen"
-          class=" absolute right-0 mt-2 py-2 transform bg-white rounded-md shadow-xl w-48 min-w-max ">
-          <a href="/profile" class="block px-4 py-2 border-b text-sm text-gray-700 hover:bg-blue-500 hover:text-white" x-text="'Profile: ' + user.username">
-          </a>
+          class=" absolute right-0 mt-2 py-2 transform bg-white rounded-md shadow-xl w-48 min-w-max "> <a
+            href="/profile/"
+            class="block px-4 py-2 border-b text-sm text-gray-700 hover:bg-blue-500 hover:text-white"
+            x-text="'Profile: ' + user.username"></a>
           <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">
             Logout
           </a>
