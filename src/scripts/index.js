@@ -89,8 +89,6 @@ Alpine.data('userInfo', userInfoComponent);
 import { loginComponent, registerComponent } from './auth';
 Alpine.data('login', loginComponent);
 Alpine.data('register', registerComponent);
-import { productComponent } from './product';
-Alpine.data('product', productComponent);
 
 // create locale
 let locale = 'en';
